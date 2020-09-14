@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cd821da1-01e6-48b4-9be9-97b0d01a2b33" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="192.168.1.191:5555" />
+  <component name="ProjectId" id="1hW115516gVcfRjYr8SisYr0qZY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="dart.analysis.tool.window.force.activate" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/android" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cd821da1-01e6-48b4-9be9-97b0d01a2b33" name="Default Changelist" comment="" />
+      <created>1600111815688</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600111815688</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="767" y="445" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1600111959612">
+      <screen x="0" y="0" width="2752" height="1112" />
+    </state>
+    <state x="767" y="445" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1600111959612" />
+    <state x="575" y="311" key="FileChooserDialogImpl" timestamp="1600112086180">
+      <screen x="0" y="0" width="2752" height="1112" />
+    </state>
+    <state x="575" y="311" key="FileChooserDialogImpl/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1600112086180" />
+    <state x="426" y="199" key="SettingsEditor" timestamp="1600111909976">
+      <screen x="0" y="0" width="2752" height="1112" />
+    </state>
+    <state x="426" y="199" key="SettingsEditor/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1600111909976" />
+  </component>
+</project>

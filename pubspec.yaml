@@ -1,0 +1,23 @@
+name: battery_info
+description: Flutter plugin providing detailed information about the device battery (level, health, charging status, etc.). Currently only supports Android
+version: 0.0.1
+author: Igor Lavrentjev
+
+environment:
+  sdk: '>=2.7.0 <3.0.0'
+  flutter: '>=1.20.0 <2.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.twarkapps.battery_info
+        pluginClass: BatteryInfoPlugin
