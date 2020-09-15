@@ -1,7 +1,9 @@
+import 'package:battery_info/enums/charging_status.dart';
+
 /// Battery Info data model
 class BatteryInfo {
   int batteryLevel = -1;
-  String chargingStatus = "unknown";
+  ChargingStatus chargingStatus = ChargingStatus.Unknown;
   int currentNow = -1;
   int currentAverage = -1;
   int chargeTimeRemaining = -1;
@@ -25,13 +27,26 @@ class BatteryInfo {
   BatteryInfo.fromJson(Map<String, dynamic> json) {
     this.batteryLevel = json["batteryLevel"];
     this.chargeTimeRemaining = json["chargeTimeRemaining"];
-    this.chargingStatus = json["chargingStatus"];
+    this.chargingStatus = _getChargingStatus(json["chargingStatus"]);
     this.currentAverage = json["currentAverage"];
     this.currentNow = json["currentNow"];
     this.health = json["health"];
     this.pluggedStatus = json["pluggedStatus"];
     this.temperature = json["temperature"];
     this.voltage = json["voltage"];
+  }
+
+  ChargingStatus _getChargingStatus(String status) {
+    switch (status) {
+      case "charging":
+        return ChargingStatus.Charging;
+      case "discharging":
+        return ChargingStatus.Discharging;
+      case "full":
+        return ChargingStatus.Full;
+      default:
+        return ChargingStatus.Unknown;
+    }
   }
 
   /// Serialise data back to json from the model
