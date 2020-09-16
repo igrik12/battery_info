@@ -22,3 +22,5 @@ flutter:
       android:
         package: com.igrik12.battery_info
         pluginClass: BatteryInfoPlugin
+      iso:
+        pluginClass: BatteryInfoPlugin
