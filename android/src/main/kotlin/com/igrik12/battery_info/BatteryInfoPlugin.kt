@@ -1,4 +1,4 @@
-package com.twarkapps.battery_info
+package com.igrik12.battery_info
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -32,8 +32,8 @@ public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
 
     private fun onAttachedToEngine(applicationContext: Context, messenger: BinaryMessenger) {
         this.applicationContext = applicationContext
-        channel = MethodChannel(messenger, "com.twarkapps.battery_info/channel")
-        streamChannel = EventChannel(messenger, "com.twarkapps.battery_info/stream")
+        channel = MethodChannel(messenger, "com.igrik12.battery_info/channel")
+        streamChannel = EventChannel(messenger, "com.igrik12.battery_info/stream")
         channel.setMethodCallHandler(this)
         streamChannel.setStreamHandler(this)
         filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)

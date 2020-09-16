@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:battery_info/battery_info_plugin.dart';
-import 'package:battery_info/model/battery_info.dart';
+import 'package:battery_info/model/android_battery_info.dart';
 import 'package:battery_info/enums/charging_status.dart';
 
 void main() {
@@ -25,8 +25,8 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FutureBuilder<BatteryInfo>(
-                  future: BatteryInfoPlugin.batteryInfo,
+              FutureBuilder<AndroidBatteryInfo>(
+                  future: BatteryInfoPlugin().androidBatteryInfo,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return Text(
@@ -37,12 +37,16 @@ class _MyAppState extends State<MyApp> {
               SizedBox(
                 height: 20,
               ),
-              StreamBuilder<BatteryInfo>(
-                  stream: BatteryInfoPlugin.batteryInfoStream,
+              StreamBuilder<AndroidBatteryInfo>(
+                  stream: BatteryInfoPlugin().androidBatteryInfoStream,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return Column(
                         children: [
+                          Text("Voltage: ${(snapshot.data.voltage)} mV"),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Text("Voltage: ${(snapshot.data.voltage)} mV"),
                           SizedBox(
                             height: 20,
@@ -65,7 +69,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget _getChargeTime(BatteryInfo data) {
+  Widget _getChargeTime(AndroidBatteryInfo data) {
     if (data.chargingStatus == ChargingStatus.Charging) {
       return data.chargeTimeRemaining == -1
           ? Text("Calculating charge time remaining")

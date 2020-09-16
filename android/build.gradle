@@ -1,4 +1,4 @@
-group 'com.twarkapps.battery_info'
+group 'com.igrik12.battery_info'
 version '1.0-SNAPSHOT'
 
 buildscript {
