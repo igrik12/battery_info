@@ -18,7 +18,7 @@ public class SwiftBatteryInfoPlugin: NSObject, FlutterPlugin {
     let channel = FlutterMethodChannel(name: "com.igrik12.battery_info/channel", binaryMessenger: registrar.messenger())
     let instance = SwiftBatteryInfoPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
-    let eventChannel = FlutterEventChannel(name: "com.igrik12.battery_info/stream", binaryMessenger: messenger!)                                                                                
+    let eventChannel = FlutterEventChannel(name: "com.igrik12.battery_info/stream", binaryMessenger:  registrar.messenger())                                                                                
     eventChannel.setStreamHandler(SwiftStreamHandler())
   }
 
