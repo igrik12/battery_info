@@ -63,7 +63,7 @@ class SwiftStreamHandler: NSObject, FlutterStreamHandler {
       return nil
     }
 
-    result(batteryInfo)
+    eventSink(batteryInfo)
     return nil
   }
 
@@ -81,8 +81,8 @@ struct BatteryInfoGenerator{
       device.isBatteryMonitoringEnabled = true
     }
 
-    private func sendBatteryState() {
-      switch UIDevice.current.batteryState {
+    private func getBatteryState() {
+      switch device.batteryState {
         case .full:
           return BatteryState.charging
         case .charging:
@@ -101,7 +101,7 @@ struct BatteryInfoGenerator{
     func generate() -> Dictionary<String, Any>{
       var batteryInfo: [String: Any] = [:]
       batteryInfo["batteryLevel"] = getBatteryLevel()
-      batteryInfo["batteryStatus"] = getBatteryStatus()
+      batteryInfo["batteryStatus"] = getBatteryState()
       return batteryInfo
     }
 }
