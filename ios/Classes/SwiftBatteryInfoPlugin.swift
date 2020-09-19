@@ -44,7 +44,6 @@ class SwiftStreamHandler: NSObject, FlutterStreamHandler {
   let generator = BatteryInfoGenerator()
   var eventSink: FlutterEventSink?
 
-  
   public func onListen(withArguments arguments: Any?, eventSink: @escaping FlutterEventSink) -> FlutterError? {
     self.eventSink = eventSink
     let batteryInfo = generator.generate()
@@ -98,7 +97,7 @@ struct BatteryInfoGenerator{
         }
     }
 
-    private func getBatteryLevel() {
+    private func getBatteryLevel() -> Int {
       Int(device.batteryLevel * 100)
     }
 
