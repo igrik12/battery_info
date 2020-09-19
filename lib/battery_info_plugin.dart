@@ -12,33 +12,53 @@ class BatteryInfoPlugin {
 
   /// Returns the battery info as a single API call
   Future<AndroidBatteryInfo> get androidBatteryInfo async {
-    final batteryInfo = await _methodChannel.invokeMethod('getBatteryInfo');
-    final converted = AndroidBatteryInfo.fromJson(Map.from(batteryInfo));
-    return converted;
+    try {
+      final batteryInfo = await _methodChannel.invokeMethod('getBatteryInfo');
+      final converted = AndroidBatteryInfo.fromJson(Map.from(batteryInfo));
+      return converted;
+    } on PlatformException catch (e) {
+      print(e.message);
+      return null;
+    }
   }
 
   /// Returns a stream of [BatteryInfo] data that is pushed out to the
   /// subscribers on updates
   Stream<AndroidBatteryInfo> get androidBatteryInfoStream {
     return _streamChannel.receiveBroadcastStream().map((data) {
-      final converted = AndroidBatteryInfo.fromJson(Map.from(data));
-      return converted;
+      try {
+        final converted = AndroidBatteryInfo.fromJson(Map.from(data));
+        return converted;
+      } on PlatformException catch (e) {
+        print(e.message);
+        return null;
+      }
     });
   }
 
   /// Returns the battery info as a single API call
   Future<IosBatteryInfo> get iosBatteryInfo async {
-    final batteryInfo = await _methodChannel.invokeMethod('getBatteryInfo');
-    final converted = IosBatteryInfo.fromJson(Map.from(batteryInfo));
-    return converted;
+    try {
+      final batteryInfo = await _methodChannel.invokeMethod('getBatteryInfo');
+      final converted = IosBatteryInfo.fromJson(Map.from(batteryInfo));
+      return converted;
+    } on PlatformException catch (e) {
+      print(e.message);
+      return null;
+    }
   }
 
   /// Returns a stream of [IsoBatteryInfo] data that is pushed out to the
   /// subscribers on updates
   Stream<IosBatteryInfo> get iosBatteryInfoStream {
     return _streamChannel.receiveBroadcastStream().map((data) {
-      final converted = IosBatteryInfo.fromJson(Map.from(data));
-      return converted;
+      try {
+        final converted = IosBatteryInfo.fromJson(Map.from(data));
+        return converted;
+      } on PlatformException catch (e) {
+        print(e.message);
+        return null;
+      }
     });
   }
 }
