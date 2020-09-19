@@ -8,12 +8,7 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,7 +42,8 @@ class _MyAppState extends State<MyApp> {
                           SizedBox(
                             height: 20,
                           ),
-                          Text("Voltage: ${(snapshot.data.voltage)} mV"),
+                          Text(
+                              "Charging status: ${(snapshot.data.chargingStatus.toString().split(".")[1])}"),
                           SizedBox(
                             height: 20,
                           ),
