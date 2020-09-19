@@ -10,7 +10,6 @@ enum CustomFlutterErrorCode {
   static let unavailable = "UNAVAILABLE"
 }
 
-
 public class SwiftBatteryInfoPlugin: NSObject, FlutterPlugin {
   let generator = BatteryInfoGenerator()
 
@@ -18,7 +17,7 @@ public class SwiftBatteryInfoPlugin: NSObject, FlutterPlugin {
     let channel = FlutterMethodChannel(name: "com.igrik12.battery_info/channel", binaryMessenger: registrar.messenger())
     let instance = SwiftBatteryInfoPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
-    let eventChannel = FlutterEventChannel(name: "com.igrik12.battery_info/stream", binaryMessenger:  registrar.messenger())                                                                                
+    let eventChannel = FlutterEventChannel(name: "com.igrik12.battery_info/stream", binaryMessenger: registrar.messenger())                                                                                
     eventChannel.setStreamHandler(SwiftStreamHandler())
   }
 
@@ -32,8 +31,10 @@ public class SwiftBatteryInfoPlugin: NSObject, FlutterPlugin {
     }
     let status: String? = batteryInfo["batteryStatus"] as? String
     if(status == CustomFlutterErrorCode.unavailable){
-      result(FlutterError(code: CustomFlutterErrorCode.unavailable,
-      message: "Battery status unavailable"))
+      result(FlutterError(
+        code: CustomFlutterErrorCode.unavailable,
+        message: "Battery status unavailable",
+        details: nil))
     }
     result(batteryInfo)
   }
@@ -45,12 +46,13 @@ class SwiftStreamHandler: NSObject, FlutterStreamHandler {
 
   
   public func onListen(withArguments arguments: Any?, eventSink: @escaping FlutterEventSink) -> FlutterError? {
-    selt.eventSink = eventSink
+    self.eventSink = eventSink
     let batteryInfo = generator.generate()
     let level: Int? = batteryInfo["batteryLevel"] as? Int
 
     if(level! < 0){
-      eventSink(FlutterError(code: CustomFlutterErrorCode.unavailable,
+      eventSink(FlutterError(
+        code: CustomFlutterErrorCode.unavailable,
         message: "Battery level unavailable",
         details: nil))
       return nil
@@ -58,7 +60,8 @@ class SwiftStreamHandler: NSObject, FlutterStreamHandler {
 
     let status: String? = batteryInfo["batteryStatus"] as? String
     if(status == CustomFlutterErrorCode.unavailable){
-      eventSink(FlutterError(code: CustomFlutterErrorCode.unavailable,
+      eventSink(FlutterError(
+        code: CustomFlutterErrorCode.unavailable,
         message: "Battery status unavailable",
         details: nil))
       return nil
@@ -82,7 +85,7 @@ struct BatteryInfoGenerator{
       device.isBatteryMonitoringEnabled = true
     }
 
-    private func getBatteryState() {
+    private func getBatteryState() -> String {
       switch device.batteryState {
         case .full:
           return BatteryState.charging
