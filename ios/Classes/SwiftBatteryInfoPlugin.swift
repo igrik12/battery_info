@@ -2,7 +2,7 @@ import Flutter
 import UIKit
 
 enum BatteryState {
-  static let chargins = "charging"
+  static let charging = "charging"
   static let discharging = "discharging"
 }
 
@@ -19,7 +19,7 @@ public class SwiftBatteryInfoPlugin: NSObject, FlutterPlugin {
     let instance = SwiftBatteryInfoPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
     let eventChannel = FlutterEventChannel(name: "com.igrik12.battery_info/stream", binaryMessenger: messenger!)                                                                                
-    eventChannel.setStreamHandler(SwiftBatteryInfoPlugin())
+    eventChannel.setStreamHandler(SwiftStreamHandler())
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -45,6 +45,7 @@ class SwiftStreamHandler: NSObject, FlutterStreamHandler {
 
   
   public func onListen(withArguments arguments: Any?, eventSink: @escaping FlutterEventSink) -> FlutterError? {
+    selt.eventSink = eventSink
     let batteryInfo = generator.generate()
     let level: Int? = batteryInfo["batteryLevel"] as? Int
 
