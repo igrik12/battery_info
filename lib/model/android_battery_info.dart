@@ -55,6 +55,7 @@ class AndroidBatteryInfo {
   AndroidBatteryInfo.fromJson(Map<String, dynamic> json) {
     this.batteryLevel = json["batteryLevel"];
     this.chargingStatus = getChargingStatus(json["chargingStatus"]);
+    this.chargeTimeRemaining = json["chargeTimeRemaining"];
     this.currentAverage = json["currentAverage"];
     this.currentNow = json["currentNow"];
     this.health = json["health"];
