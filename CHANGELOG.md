@@ -9,3 +9,7 @@
 ## 1.0.1
 
 * Added support for IOS (only battery level and charging status)
+
+## 1.0.2
+
+* Fixed bug: remaining charge time was always returning -1
