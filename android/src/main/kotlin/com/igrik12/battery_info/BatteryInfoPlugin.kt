@@ -63,10 +63,15 @@ public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
         var batteryLevel = -1
         var currentAverage = -1
         var currentNow = -1
+        var present = intent.extras.getBoolean(BatteryManager.EXTRA_PRESENT);
+        var scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE,0);
+        var remainingEnergy = -1;
+        var technology = intent.extras.getString(BatteryManager.EXTRA_TECHNOLOGY);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             batteryLevel = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
             currentAverage = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE)
             currentNow = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW)
+            remainingEnergy = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_ENERGY_COUNTER);
         }
 
         val chargeTimeRemaining = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -77,14 +82,18 @@ public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
         val temperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0)
         return mapOf(
                 "batteryLevel" to batteryLevel,
-                "voltage" to voltage,
-                "chargingStatus" to chargingStatus,
-                "pluggedStatus" to pluggedStatus,
-                "health" to health,
-                "temperature" to temperature / 10,
-                "currentNow" to currentNow,
                 "chargeTimeRemaining" to chargeTimeRemaining,
-                "currentAverage" to currentAverage
+                "chargingStatus" to chargingStatus,
+                "currentAverage" to currentAverage,
+                "currentNow" to currentNow,
+                "health" to health,
+                "present" to present,
+                "pluggedStatus" to pluggedStatus,
+                "remainingEnergy" to remainingEnergy,
+                "scale" to scale,
+                "technology" to technology,
+                "temperature" to temperature / 10,
+                "voltage" to voltage
         )
     }
 

@@ -52,6 +52,24 @@ class MyApp extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
+                          Text("Technology: ${(snapshot.data.technology)} "),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                              "Battery present: ${snapshot.data.present ? "Yes" : "False"} "),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text("Scale: ${(snapshot.data.scale)} "),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                              "Remaining energy: ${-(snapshot.data.remainingEnergy * 1.0E-9)} Watt-hours,"),
+                          SizedBox(
+                            height: 20,
+                          ),
                           _getChargeTime(snapshot.data),
                         ],
                       );
