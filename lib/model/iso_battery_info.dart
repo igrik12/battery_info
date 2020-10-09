@@ -29,6 +29,6 @@ class IosBatteryInfo {
   @override
   IosBatteryInfo.fromJson(Map<String, dynamic> json) {
     this.batteryLevel = json["batteryLevel"];
-    this.chargingStatus = getChargingStatus(json["chargingStatus"]);
+    this.chargingStatus = getChargingStatus(json["batteryStatus"]);
   }
 }

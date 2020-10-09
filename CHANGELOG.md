@@ -21,3 +21,7 @@
     - Scale (maximum scale of the battery)
     - If battery is present
     - Remaining energy (nanowatt-hours)
+
+## 1.0.4
+
+* Fixed bug: IOS battery charging status not showing properly
