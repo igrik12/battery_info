@@ -25,3 +25,7 @@
 ## 1.0.4
 
 * Fixed bug: IOS battery charging status not showing properly
+
+## 1.0.5
+
+* Updated documentation with IOS example

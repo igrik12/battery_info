@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:battery_info/battery_info_plugin.dart';
 import 'package:battery_info/model/android_battery_info.dart';
 import 'package:battery_info/enums/charging_status.dart';

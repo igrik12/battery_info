@@ -4,7 +4,7 @@
 
 Flutter plugin, inspired by [battery](https://pub.dev/packages/battery) package, providing detailed information about the device battery (level, health, charging status, etc.). Now supports both IOS and Android.
 
-* Remaining charge time is only available on API level 28 (Android 9 Pie) and higher
+- Remaining charge time is only available on API level 28 (Android 9 Pie) and higher
 
 👀 Unfortunately, due to Apple limitations can only retrieve battery level and charging status for the IOS devices.
 
@@ -19,9 +19,13 @@ To use this plugin, add `battery_info` as a [dependency in your pubspec.yaml fil
 import 'package:battery/battery_info.dart';
 import 'package:battery_info/model/android_battery_info.dart';
 import 'package:battery_info/enums/charging_status.dart';
+import 'package:battery_info/model/iso_battery_info.dart';
 
-// Access current battery health
-print("Battery Level: ${(await BatteryInfoPlugin().androidBatteryInfo).health}");
+// Access current battery health - Android
+print("Battery Health: ${(await BatteryInfoPlugin().androidBatteryInfo).health}");
+
+// Access current battery level - IOS
+print("Battery Level: ${(await BatteryInfoPlugin().iosBatteryInfo).batteryLevel}");
 
 // Calculate estimated charging time
 BatteryInfoPlugin().androidBatteryInfoStream.listen((AndroidBatteryInfo batteryInfo) {
