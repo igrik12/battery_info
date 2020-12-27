@@ -29,3 +29,8 @@
 ## 1.0.5
 
 * Updated documentation with IOS example
+
+## 1.0.6
+
+* Minor bug fix
+* Updated documentation with available battery info for both platforms
