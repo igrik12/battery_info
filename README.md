@@ -12,6 +12,27 @@ Flutter plugin, inspired by [battery](https://pub.dev/packages/battery) package,
 
 To use this plugin, add `battery_info` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
+## Available battery information
+
+##### Android :
+  - Battery Level
+  - Charging Status
+  - Charge Time Remaining 
+  - Current Average 
+  - Current Now 
+  - Health 
+  - Plugged Status 
+  - Battery Presence 
+  - Scale 
+  - Remaining Energy 
+  - Technology 
+  - Temperature 
+  - Voltage 
+
+##### IOS :
+  - Battery Level
+  - Charging Status
+
 ### Example
 
 ```dart
