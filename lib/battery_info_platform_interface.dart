@@ -29,7 +29,7 @@ abstract class BatteryInfoPlatform extends PlatformInterface {
   }
 
   /// gets android battery info from device.
-  Stream<AndroidBatteryInfo> onAndroidBatteryInfoChanged() {
+  Stream<AndroidBatteryInfo> androidBatteryInfoStream() {
     throw UnimplementedError(
         'onAndroidBatteryInfoChanged() has not been implemented.');
   }
@@ -40,7 +40,7 @@ abstract class BatteryInfoPlatform extends PlatformInterface {
   }
 
   /// gets ios battery info from device.
-  Stream<IosBatteryInfo> onIosBatteryInfoChanged() {
+  Stream<IosBatteryInfo> iosBatteryInfoStream() {
     throw UnimplementedError(
         'onIosBatteryInfoChanged() has not been implemented.');
   }
