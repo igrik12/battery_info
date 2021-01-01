@@ -34,3 +34,7 @@
 
 * Minor bug fix
 * Updated documentation with available battery info for both platforms
+
+## 1.0.7 
+
+* Removed platform interface
