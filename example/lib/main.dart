@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
                             height: 20,
                           ),
                           Text(
-                              "Battery Capacity: ${(snapshot.data.batteryCapacity)} mAh"),
+                              "Battery Capacity: ${(snapshot.data.batteryCapacity/1000)} mAh"),
                           SizedBox(
                             height: 20,
                           ),
