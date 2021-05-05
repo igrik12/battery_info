@@ -9,6 +9,7 @@ class AndroidBatteryInfo {
   String pluggedStatus = "unknown";
   String technology = "unknown";
   int batteryLevel;
+  int batteryCapacity;
   int remainingEnergy = -1;
   int scale;
   int temperature = -1;
@@ -17,6 +18,7 @@ class AndroidBatteryInfo {
   ChargingStatus chargingStatus;
 
   AndroidBatteryInfo({
+    this.batteryCapacity,
     this.batteryLevel,
     this.chargeTimeRemaining,
     this.chargingStatus,
@@ -35,6 +37,7 @@ class AndroidBatteryInfo {
   /// Serialise data back to json from the model
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data["batteryCapacity"] = this.batteryCapacity;
     data["batteryLevel"] = this.batteryLevel;
     data["chargingStatus"] = this.chargingStatus;
     data["chargeTimeRemaining"] = this.chargeTimeRemaining;
@@ -67,6 +70,7 @@ class AndroidBatteryInfo {
 
   /// Deserialize data from json
   AndroidBatteryInfo.fromJson(Map<String, dynamic> json) {
+    this.batteryCapacity = json["batteryCapacity"];
     this.batteryLevel = json["batteryLevel"];
     this.chargingStatus = getChargingStatus(json["chargingStatus"]);
     this.chargeTimeRemaining = json["chargeTimeRemaining"];

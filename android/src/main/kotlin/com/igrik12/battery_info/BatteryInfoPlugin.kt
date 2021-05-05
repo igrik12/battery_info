@@ -61,6 +61,7 @@ public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
         val health = getBatteryHealth(intent)
         val pluggedStatus = getBatteryPluggedStatus(intent)
         var batteryLevel = -1
+        var batteryCapacity = -1
         var currentAverage = -1
         var currentNow = -1
         var present = intent.extras.getBoolean(BatteryManager.EXTRA_PRESENT);
@@ -69,6 +70,7 @@ public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
         var technology = intent.extras.getString(BatteryManager.EXTRA_TECHNOLOGY);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             batteryLevel = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
+            batteryCapacity = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER)
             currentAverage = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE)
             currentNow = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW)
             remainingEnergy = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_ENERGY_COUNTER);
@@ -82,6 +84,7 @@ public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
         val temperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0)
         return mapOf(
                 "batteryLevel" to batteryLevel,
+                "batteryCapacity" to batteryCapacity,
                 "chargeTimeRemaining" to chargeTimeRemaining,
                 "chargingStatus" to chargingStatus,
                 "currentAverage" to currentAverage,

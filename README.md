@@ -15,6 +15,7 @@ To use this plugin, add `battery_info` as a [dependency in your pubspec.yaml fil
 ## Available battery information
 
 ##### Android :
+  - Battery Capacity
   - Battery Level
   - Charging Status
   - Charge Time Remaining 
