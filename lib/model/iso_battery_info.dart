@@ -1,8 +1,8 @@
 import 'package:battery_info/enums/charging_status.dart';
 
 class IosBatteryInfo {
-  int batteryLevel;
-  ChargingStatus chargingStatus;
+  int? batteryLevel;
+  ChargingStatus? chargingStatus;
   IosBatteryInfo({this.batteryLevel, this.chargingStatus});
 
   /// Serialise data back to json from the model
@@ -13,7 +13,7 @@ class IosBatteryInfo {
     return data;
   }
 
-  ChargingStatus getChargingStatus(String status) {
+  ChargingStatus getChargingStatus(String? status) {
     switch (status) {
       case "charging":
         return ChargingStatus.Charging;

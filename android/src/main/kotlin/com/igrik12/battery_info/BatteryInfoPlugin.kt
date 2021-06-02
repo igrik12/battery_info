@@ -55,7 +55,7 @@ public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
     }
 
     /** Gets battery information*/
-    private fun getBatteryInfo(intent: Intent): Map<String, Any> {
+    private fun getBatteryInfo(intent: Intent): Map<String, Any?> {
         var chargingStatus = getChargingStatus(intent)
         val voltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)
         val health = getBatteryHealth(intent)
@@ -64,10 +64,10 @@ public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
         var batteryCapacity = -1
         var currentAverage = -1
         var currentNow = -1
-        var present = intent.extras.getBoolean(BatteryManager.EXTRA_PRESENT);
+        var present = intent.extras?.getBoolean(BatteryManager.EXTRA_PRESENT);
         var scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE,0);
         var remainingEnergy = -1;
-        var technology = intent.extras.getString(BatteryManager.EXTRA_TECHNOLOGY);
+        var technology = intent.extras?.getString(BatteryManager.EXTRA_TECHNOLOGY);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             batteryLevel = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
             batteryCapacity = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER)
@@ -140,7 +140,7 @@ public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
     }
 
     /**This call acts as a MethodChannel handler to retrieve battery information*/
-    private fun getBatteryCall(): Map<String, Any> {
+    private fun getBatteryCall(): Map<String, Any?> {
         val intent: Intent? = applicationContext.registerReceiver(null, filter)
         return intent?.let { getBatteryInfo(it) }!!;
     }
