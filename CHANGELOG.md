@@ -38,3 +38,7 @@
 ## 1.0.7 
 
 * Removed platform interface
+
+## 1.0.8
+
+* Migrated to null safety
