@@ -2,20 +2,20 @@ import 'package:battery_info/enums/charging_status.dart';
 
 /// Android Battery Info data model
 class AndroidBatteryInfo {
-  int currentNow = -1;
-  int currentAverage = -1;
-  int chargeTimeRemaining = -1;
-  String health = "unknown";
-  String pluggedStatus = "unknown";
-  String technology = "unknown";
-  int batteryLevel;
-  int batteryCapacity;
-  int remainingEnergy = -1;
-  int scale;
-  int temperature = -1;
-  int voltage = -1;
-  bool present = true;
-  ChargingStatus chargingStatus;
+  int? currentNow = -1;
+  int? currentAverage = -1;
+  int? chargeTimeRemaining = -1;
+  String? health = "unknown";
+  String? pluggedStatus = "unknown";
+  String? technology = "unknown";
+  int? batteryLevel;
+  int? batteryCapacity;
+  int? remainingEnergy = -1;
+  int? scale;
+  int? temperature = -1;
+  int? voltage = -1;
+  bool? present = true;
+  ChargingStatus? chargingStatus;
 
   AndroidBatteryInfo({
     this.batteryCapacity,
@@ -55,7 +55,7 @@ class AndroidBatteryInfo {
   }
 
   /// Retrieves the chargin status from the native value
-  ChargingStatus getChargingStatus(String status) {
+  ChargingStatus getChargingStatus(String? status) {
     switch (status) {
       case "charging":
         return ChargingStatus.Charging;

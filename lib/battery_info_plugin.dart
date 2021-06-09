@@ -11,7 +11,7 @@ class BatteryInfoPlugin {
       EventChannel("com.igrik12.battery_info/stream");
 
   /// Returns the battery info as a single API call
-  Future<AndroidBatteryInfo> get androidBatteryInfo async {
+  Future<AndroidBatteryInfo?> get androidBatteryInfo async {
     try {
       final batteryInfo = await methodChannel.invokeMethod('getBatteryInfo');
       final converted = AndroidBatteryInfo.fromJson(Map.from(batteryInfo));
@@ -24,7 +24,7 @@ class BatteryInfoPlugin {
 
   /// Returns a stream of [BatteryInfo] data that is pushed out to the
   /// subscribers on updates
-  Stream<AndroidBatteryInfo> get androidBatteryInfoStream {
+  Stream<AndroidBatteryInfo?> get androidBatteryInfoStream {
     return streamChannel.receiveBroadcastStream().map((data) {
       try {
         final converted = AndroidBatteryInfo.fromJson(Map.from(data));
@@ -37,7 +37,7 @@ class BatteryInfoPlugin {
   }
 
   /// Returns the battery info as a single API call
-  Future<IosBatteryInfo> get iosBatteryInfo async {
+  Future<IosBatteryInfo?> get iosBatteryInfo async {
     try {
       final batteryInfo = await methodChannel.invokeMethod('getBatteryInfo');
       final converted = IosBatteryInfo.fromJson(Map.from(batteryInfo));
@@ -50,7 +50,7 @@ class BatteryInfoPlugin {
 
   /// Returns a stream of [IsoBatteryInfo] data that is pushed out to the
   /// subscribers on updates
-  Stream<IosBatteryInfo> get iosBatteryInfoStream {
+  Stream<IosBatteryInfo?> get iosBatteryInfoStream {
     return streamChannel.receiveBroadcastStream().map((data) {
       try {
         final converted = IosBatteryInfo.fromJson(Map.from(data));
