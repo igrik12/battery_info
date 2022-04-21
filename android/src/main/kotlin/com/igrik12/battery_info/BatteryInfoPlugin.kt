@@ -115,7 +115,7 @@ public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
     /** Gets the battery health */
     private fun getBatteryHealth(intent: Intent): String {
         return when (intent.getIntExtra(BatteryManager.EXTRA_HEALTH, -1)) {
-            BatteryManager.BATTERY_HEALTH_GOOD -> "heath_good"
+            BatteryManager.BATTERY_HEALTH_GOOD -> "health_good"
             BatteryManager.BATTERY_HEALTH_DEAD -> "dead"
             BatteryManager.BATTERY_HEALTH_OVERHEAT -> "over_heat"
             BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE -> "over_voltage"
