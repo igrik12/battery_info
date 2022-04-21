@@ -42,3 +42,7 @@
 ## 1.0.8
 
 * Migrated to null safety
+
+## 1.1.1
+
+* Small bug fix for battery health naming
