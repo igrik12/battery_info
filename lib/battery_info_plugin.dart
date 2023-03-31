@@ -5,10 +5,8 @@ import 'package:flutter/services.dart';
 
 /// Plugin for accessing the battery information of the device
 class BatteryInfoPlugin {
-  static const MethodChannel methodChannel =
-      const MethodChannel('com.igrik12.battery_info/channel');
-  static const EventChannel streamChannel =
-      EventChannel("com.igrik12.battery_info/stream");
+  static const MethodChannel methodChannel = const MethodChannel('com.igrik12.battery_info/channel');
+  static const EventChannel streamChannel = const EventChannel("com.igrik12.battery_info/stream");
 
   /// Returns the battery info as a single API call
   Future<AndroidBatteryInfo?> get androidBatteryInfo async {

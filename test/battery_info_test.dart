@@ -9,8 +9,7 @@ void main() {
 
   group("$BatteryInfoPlugin ", () {
     setUp(() async {
-      BatteryInfoPlugin.methodChannel
-          .setMockMethodCallHandler((MethodCall methodCall) async {
+      BatteryInfoPlugin.methodChannel.setMockMethodCallHandler((MethodCall methodCall) async {
         switch (methodCall.method) {
           case 'getBatteryInfo':
             return (AndroidBatteryInfo()
@@ -22,15 +21,13 @@ void main() {
         }
       });
 
-      MethodChannel(BatteryInfoPlugin.streamChannel.name)
-          .setMockMethodCallHandler((MethodCall methodCall) async {
+      MethodChannel(BatteryInfoPlugin.streamChannel.name).setMockMethodCallHandler((MethodCall methodCall) async {
         switch (methodCall.method) {
           case 'listen':
-            await ServicesBinding.instance!.defaultBinaryMessenger
-                .handlePlatformMessage(
+            await ServicesBinding.instance.defaultBinaryMessenger.handlePlatformMessage(
               BatteryInfoPlugin.streamChannel.name,
-              BatteryInfoPlugin.streamChannel.codec.encodeSuccessEnvelope(
-                  (AndroidBatteryInfo()..health = "healthy").toJson()),
+              BatteryInfoPlugin.streamChannel.codec
+                  .encodeSuccessEnvelope((AndroidBatteryInfo()..health = "healthy").toJson()),
               (_) {},
             );
             break;
@@ -42,23 +39,20 @@ void main() {
     });
 
     test("getBatteryInfo for Android", () async {
-      final AndroidBatteryInfo result =
-          await (BatteryInfoPlugin().androidBatteryInfo as FutureOr<AndroidBatteryInfo>);
-      expect(result.batteryLevel, 90);
-      expect(result.chargeTimeRemaining, 1000);
+      final AndroidBatteryInfo? result = await BatteryInfoPlugin().androidBatteryInfo;
+      expect(result?.batteryLevel, 90);
+      expect(result?.chargeTimeRemaining, 1000);
     });
 
     test("androidBatteryInfoStream for Android", () async {
-      final AndroidBatteryInfo result =
-          await (BatteryInfoPlugin().androidBatteryInfoStream.first as FutureOr<AndroidBatteryInfo>);
-      expect(result.health, "healthy");
+      final AndroidBatteryInfo? result = await BatteryInfoPlugin().androidBatteryInfoStream.first;
+      expect(result?.health, "healthy");
     });
   });
 
   group("$BatteryInfoPlugin IOS", () {
     setUp(() async {
-      BatteryInfoPlugin.methodChannel
-          .setMockMethodCallHandler((MethodCall methodCall) async {
+      BatteryInfoPlugin.methodChannel.setMockMethodCallHandler((MethodCall methodCall) async {
         switch (methodCall.method) {
           case 'getBatteryInfo':
             return (IosBatteryInfo()..batteryLevel = 60).toJson();
@@ -67,15 +61,13 @@ void main() {
         }
       });
 
-      MethodChannel(BatteryInfoPlugin.streamChannel.name)
-          .setMockMethodCallHandler((MethodCall methodCall) async {
+      MethodChannel(BatteryInfoPlugin.streamChannel.name).setMockMethodCallHandler((MethodCall methodCall) async {
         switch (methodCall.method) {
           case 'listen':
-            await ServicesBinding.instance!.defaultBinaryMessenger
-                .handlePlatformMessage(
+            await ServicesBinding.instance.defaultBinaryMessenger.handlePlatformMessage(
               BatteryInfoPlugin.streamChannel.name,
-              BatteryInfoPlugin.streamChannel.codec.encodeSuccessEnvelope(
-                  (IosBatteryInfo()..batteryLevel = 60).toJson()),
+              BatteryInfoPlugin.streamChannel.codec
+                  .encodeSuccessEnvelope((IosBatteryInfo()..batteryLevel = 60).toJson()),
               (_) {},
             );
             break;
@@ -87,14 +79,13 @@ void main() {
     });
 
     test("getBatteryInfo for IOS", () async {
-      final IosBatteryInfo result = await (BatteryInfoPlugin().iosBatteryInfo as FutureOr<IosBatteryInfo>);
-      expect(result.batteryLevel, 60);
+      final IosBatteryInfo? result = await BatteryInfoPlugin().iosBatteryInfo;
+      expect(result?.batteryLevel, 60);
     });
 
     test("androidBatteryInfoStream for IOS", () async {
-      final IosBatteryInfo result =
-          await (BatteryInfoPlugin().iosBatteryInfoStream.first as FutureOr<IosBatteryInfo>);
-      expect(result.batteryLevel, 60);
+      final IosBatteryInfo? result = await BatteryInfoPlugin().iosBatteryInfoStream.first;
+      expect(result?.batteryLevel, 60);
     });
   });
 }

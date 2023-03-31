@@ -19,12 +19,12 @@ import io.flutter.plugin.common.MethodChannel.Result
 
 /** BatteryInfoPlugin */
 public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler {
-    private lateinit var applicationContext: Context
-    private lateinit var channel: MethodChannel
-    private lateinit var streamChannel: EventChannel
+    private var applicationContext: Context? = null
+    private var channel: MethodChannel? = null
+    private var streamChannel: EventChannel? = null
     private lateinit var filter: IntentFilter
     private lateinit var batteryManager: BatteryManager
-    private lateinit var chargingStateChangeReceiver: BroadcastReceiver
+    private var chargingStateChangeReceiver: BroadcastReceiver? = null
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         onAttachedToEngine(flutterPluginBinding.applicationContext, flutterPluginBinding.binaryMessenger)
@@ -34,10 +34,10 @@ public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
         this.applicationContext = applicationContext
         channel = MethodChannel(messenger, "com.igrik12.battery_info/channel")
         streamChannel = EventChannel(messenger, "com.igrik12.battery_info/stream")
-        channel.setMethodCallHandler(this)
-        streamChannel.setStreamHandler(this)
+        channel?.setMethodCallHandler(this)
+        streamChannel?.setStreamHandler(this)
         filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
-        batteryManager = applicationContext.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+        batteryManager = applicationContext?.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -50,8 +50,15 @@ public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-        channel.setMethodCallHandler(null)
-        streamChannel.setStreamHandler(null)
+        channel?.setMethodCallHandler(null)
+        streamChannel?.setStreamHandler(null)
+        channel = null;
+        streamChannel = null;
+        if(chargingStateChangeReceiver != null) {
+            applicationContext?.unregisterReceiver(chargingStateChangeReceiver);
+            applicationContext = null;
+            chargingStateChangeReceiver = null;
+        }
     }
 
     /** Gets battery information*/
@@ -141,18 +148,19 @@ public class BatteryInfoPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
 
     /**This call acts as a MethodChannel handler to retrieve battery information*/
     private fun getBatteryCall(): Map<String, Any?> {
-        val intent: Intent? = applicationContext.registerReceiver(null, filter)
+        val intent: Intent? = applicationContext?.registerReceiver(null, filter)
         return intent?.let { getBatteryInfo(it) }!!;
     }
 
     override fun onListen(arguments: Any?, events: EventSink?) {
         chargingStateChangeReceiver = createChargingStateChangeReceiver(events);
-        applicationContext.registerReceiver(
+        applicationContext?.registerReceiver(
                 chargingStateChangeReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
 
     override fun onCancel(arguments: Any?) {
-        applicationContext.unregisterReceiver(chargingStateChangeReceiver);
+        applicationContext!!.unregisterReceiver(chargingStateChangeReceiver);
+        chargingStateChangeReceiver = null;
     }
 
     /** Creates broadcast receiver object that provides battery information upon subscription to the stream */
